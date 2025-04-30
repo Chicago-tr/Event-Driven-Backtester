@@ -1,0 +1,2 @@
+The folder contains a few strategies implemented from "Successfull Algorithmic Trading" as well the data and portfolio classes modified to
+handle a strategy built for minute bars.
