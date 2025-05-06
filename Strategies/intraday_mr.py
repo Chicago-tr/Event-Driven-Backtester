@@ -134,7 +134,7 @@ class IntradayOLSMRStrategy(Strategy):
             self.calculate_signals_for_pairs()
 
 if __name__ == "__main__":
-    csv_dir = '/Users/johnurban/quant projects/'
+    csv_dir = 'PATH HERE'
     symbol_list = ['SPY', 'QQQ']
     initial_capital = 100000.0
     heartbeat = 0.0
