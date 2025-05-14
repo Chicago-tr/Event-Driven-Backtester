@@ -1,7 +1,8 @@
 # Event Driven Backtester
 Implementation of an event driven backtesting engine for algorithmic trading strategies found in "Successful Algorithmic Trading". Updated code to avoid deprecated features/packages.
 
-## How it works/Walkthrough
+## How it works
+A brief overview of the backtester's class structure and how it executes.
 
 The backtester is split into a number of components (class objects) that are brought together when a backtest class object is initialized. The following are the basic steps that make up the backtest.
 
@@ -15,22 +16,26 @@ backtest.simulate_trading()
 When initializing the backtest an events queue is created. This queue along with the passed arguments and component classes are stored as data attributes of the backtest.
 
 ```python
-self.csv_dir = csv_dir
-self.symbol_list = symbol_list
-self.initial_capital = initial_capital
-self.heartbeat = heartbeat
-self.start_date = start_date
-self.data_handler_cls = data_handler
-self.execution_handler_cls = execution_handler
-self.portfolio_cls = portfolio
-self.strategy_cls = strategy
-
-self.events = queue.Queue()
-
-self.signals = 0
-self.orders = 0
-self.fills = 0
-self.num_strats = 1
+class Backtest(object):
+  def __init__(self, csv_dir, symbol_list, initial_capital, heartbeat,
+                 start_date, data_handler, execution_handler, portfolio, strategy):
+  self.csv_dir = csv_dir
+  self.symbol_list = symbol_list
+  self.initial_capital = initial_capital
+  self.heartbeat = heartbeat
+  self.start_date = start_date
+  self.data_handler_cls = data_handler
+  self.execution_handler_cls = execution_handler
+  self.portfolio_cls = portfolio
+  self.strategy_cls = strategy
+  
+  self.events = queue.Queue()
+  
+  self.signals = 0
+  self.orders = 0
+  self.fills = 0
+  self.num_strats = 1
+  self._generate_trading_instances()
 ```
 The method _generate_trading_instances() is then called which creates the instances of the components of the backtester using the attributes of the backtest. This helps ensure consistency throughout the engine.
 
